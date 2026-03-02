@@ -1,0 +1,43 @@
+#NEXUS
+begin data;
+dimension ntax=25 nchar=11;
+matrix
+LZJ       00010000111
+LZY       00010000110
+LZB       00010000110
+TYSS      00010000110
+YCAA      10000000010
+YCBB      00010000010
+ZYA       11110000010
+ZYB       10110010010
+WXA       11101000010
+WXB       10111000010
+WXC       10100000010
+LMGWZS    11110000110
+QDYS      10110000110
+TYZD      00011000000
+ZXZD      00001000000
+YCY       00011100100
+YCE       00011110100
+YCSA      00011110000
+YCSB      00011110110
+YCSC      00001110100
+YCSD      00011100110
+CZWZ      00010001001
+ZDY       00010001100
+XZMC      00010001101
+LD        00010001111
+;
+end;
+
+begin paup;
+    log file=paup_bootstrap_search.log start replace=yes;
+    set increase=auto;
+    outgroup LZJ;
+    bootstrap nreps=100 search=heuristic/ addseq=random nreps=100 swap=tbr;
+    contree all/majRule=yes LE50=yes treeFile=paup_majRule.nex format=Nexus saveSupport=Both saveAsRooted=yes outRoot=paraphyletic;
+    log stop;
+    quit;
+end;
+
+
