@@ -1,11 +1,11 @@
 #NEXUS
 begin data;
-dimension ntax=25 nchar=21;
-matrix
+    dimension ntax=25 nchar=21;
+    matrix
 LZJ       000100001111000010000
-LZY       000100001101000010000
-LZB       000100001101000010000
-TYSS      000100001101000010000
+LZY       000100001101000001000
+LZB       000100001101000001000
+TYSS      000100001101000001000
 YCAA      100000000100100001000
 YCBB      000100000100100001000
 ZYA       111100000100100001000
@@ -31,11 +31,12 @@ LD        000100011110000100001
 end;
 
 begin paup;
-    log file=paup_bootstrap_search.log start replace=yes;
-    set increase=auto;
-    outgroup LZJ;
-    bootstrap nreps=100 search=heuristic/ addseq=random nreps=100 swap=tbr;
-    contree all/majRule=yes LE50=yes treeFile=paup_majRule.nex format=Nexus saveSupport=Both saveAsRooted=yes outRoot=paraphyletic;
+    log file=paup_w_2.log start replace=yes;
+    set increase=no maxtrees=10000;
+    
+    bootstrap nreps=200 seed=12345 search=heuristic/ addseq=random nreps=1 rseed=12345 swap=spr;
+    
+    contree all/majRule=yes treeFile=paup_w_2.nex format=Nexus saveSupport=Both;
     log stop;
     quit;
 end;
