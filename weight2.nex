@@ -33,9 +33,7 @@ end;
 begin paup;
     log file=paup_w_2.log start replace=yes;
     set increase=no maxtrees=10000;
-    
     bootstrap nreps=200 seed=12345 search=heuristic/ addseq=random nreps=1 rseed=12345 swap=spr;
-    
     contree all/majRule=yes treeFile=paup_w_2.nex format=Nexus saveSupport=Both;
     log stop;
     quit;
